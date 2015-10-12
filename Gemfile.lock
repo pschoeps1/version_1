@@ -1,12 +1,3 @@
-GIT
-  remote: git://github.com/IcaliaLabs/sabisu-rails.git
-  revision: af7499e87912dc7d23a73c562ac9aa2c1f1da35f
-  specs:
-    sabisu_rails (0.0.2.beta)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
-      httparty (~> 0.13)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -39,7 +30,6 @@ GEM
     arel (4.0.2)
     bcrypt (3.1.10)
     builder (3.1.4)
-    chunky_png (1.3.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -47,12 +37,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
-    compass (0.12.7)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.2.19)
-    compass-rails (2.0.0)
-      compass (>= 0.12.2)
     devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -69,18 +53,7 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffaker (2.1.0)
-    font-awesome-rails (4.4.0.0)
-      railties (>= 3.2, < 5.0)
-    fssm (0.2.10)
-    furatto (1.4.0)
-      actionpack (>= 3.1)
-      activemodel (>= 3.1)
-      compass-rails (~> 2.0)
-      railties (>= 3.1.0)
     hike (1.2.3)
-    httparty (0.13.7)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -95,7 +68,6 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.11.2)
-    multi_xml (0.5.5)
     orm_adapter (0.5.0)
     pg (0.18.3)
     polyglot (0.3.5)
@@ -151,9 +123,6 @@ GEM
       rdoc (~> 4.0)
     shoulda-matchers (3.0.0)
       activesupport (>= 4.0.0)
-    simple_form (3.2.0)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
     sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -189,23 +158,18 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   coffee-rails (~> 4.0.0)
-  compass-rails
   devise
   factory_girl_rails
   ffaker
-  font-awesome-rails
-  furatto
   jbuilder (~> 1.2)
   jquery-rails
   pg
   rails (= 4.0.0)
   rails_12factor
   rspec-rails (~> 2.14)
-  sabisu_rails!
   sass-rails (~> 4.0.0)
   sdoc
   shoulda-matchers
-  simple_form
   turbolinks
   uglifier (>= 1.3.0)
   versionist
