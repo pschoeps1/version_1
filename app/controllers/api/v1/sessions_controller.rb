@@ -14,7 +14,9 @@ class Api::V1::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(user_params[:password])
       sign_in("user", resource)
-      render :json=> {:success=>true, :auth_token=>resource.auth_token, :email=>resource.email}
+      resource.generate_authentication_token!
+      resource.save
+      render :json=> {:success=>true, :auth_token=>resource.generate_authentication_token!, :email=>resource.email, :user_id=>resource.id }
       return
     end
     invalid_login_attempt
@@ -25,12 +27,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   protected
-
-  def generate_authentication_token!
-    begin
-      self.auth_token = SecureRandom.uuid
-    end while self.class.exists?(auth_token: auth_token)
-  end
 
   def ensure_params_exist
     return unless params[:email].blank? 

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   def generate_authentication_token!
     begin
       self.auth_token = SecureRandom.uuid
-    end while self.class.exists?(auth_token: auth_token)
+    end
+    #end while self.class.exists?(auth_token: auth_token)
   end
 end
