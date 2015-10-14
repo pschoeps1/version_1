@@ -3,7 +3,8 @@ class Api::V1::UsersController < ApplicationController
   respond_to :json
 
   def show
-    respond_with User.find(params[:id])
+    user = User.find(params[:id])
+    render :json=> { :email=>user.email, :user_id=>user.id }
   end
 
   def create
