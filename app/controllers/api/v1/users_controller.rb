@@ -35,9 +35,9 @@ class Api::V1::UsersController < ApplicationController
     groups = user.groups
     followed_groups = user.following
     respond_to do |format|
-      format.json  { render :json => groups}
-      format.json  { render :json => followed_groups}
-    end
+    format.json  { render :json => {:groups=> groups, 
+                                  :followed_groups => followed_groups }}
+end
   end
 
   private
