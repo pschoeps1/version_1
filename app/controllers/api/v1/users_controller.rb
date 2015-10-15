@@ -30,6 +30,13 @@ class Api::V1::UsersController < ApplicationController
     head 204
   end
 
+  def dashboard
+    user = User.find(params[:id])
+    groups = user.groups
+    followed_groups = user.following
+    render json: groups
+  end
+
   private
 
     def user_params
