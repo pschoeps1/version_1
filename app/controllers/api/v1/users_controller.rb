@@ -34,8 +34,10 @@ class Api::V1::UsersController < ApplicationController
     user = User.find(params[:id])
     groups = user.groups
     followed_groups = user.following
-    both = groups && followe_groups
-    render json: both
+    respond_to do |format|
+      format.json  { render :json => groups}
+      format.json  { render :json => followed_groups}
+    end
   end
 
   private
