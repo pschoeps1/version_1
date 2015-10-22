@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
   def following?(group)
     Relationship.exists? follower_id: id, followed_id: group.id
   end
+
+  def as_json(options={})
+  super(:only => [:name, :email])
+end
 end
