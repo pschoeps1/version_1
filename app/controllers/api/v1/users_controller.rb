@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate_with_token!, only: [:update, :destroy]
-  respond_to :json
+  #respond_to :json
 
   def show
     user = User.find(params[:id])
@@ -32,9 +32,9 @@ class Api::V1::UsersController < ApplicationController
 
   def dashboard
     user = User.find(params[:id])
-    groups = user.groups
+    @groups = user.groups
     followed_groups = user.following
-    render json: groups
+    render json: @groups
     #respond_to do |format|
    # format.json  { render :json => {:groups=> groups, 
    #                               :followed_groups => followed_groups }}
