@@ -16,7 +16,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       sign_in("user", resource)
       resource.generate_authentication_token!
       resource.save
-      render :json=> {:success=>true, :auth_token=>resource.generate_authentication_token!, :email=>resource.email, :user_id=>resource.id }
+      render :json=> {:success=>true, :auth_token=>resource.generate_authentication_token!, :email=>resource.email, :user_id=>resource.id, :user_name=>resource.username }
       return
     end
     invalid_login_attempt
