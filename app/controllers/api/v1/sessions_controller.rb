@@ -23,7 +23,8 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
   
   def destroy
-    sign_out(resource_name)
+    resource = User.find_for_database_authentication(email: user_params[:email])
+    sign_out(resource)
   end
 
   protected
