@@ -48,6 +48,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def user_params
-      params.fetch(:user, {}).permit(:email, :password)
+      params.fetch(:user, {}).permit(:email, :password, :auth_token)
   end
 end
