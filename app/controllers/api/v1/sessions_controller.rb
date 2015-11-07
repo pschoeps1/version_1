@@ -26,7 +26,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     resource = User.find_for_database_authentication(email: user_params[:email])
     sign_out(resource)
     resource.generate_authentication_token!
-    sign_out(resource)
+    #sign_out(resource)
     render :json=> { :success=>true }
   end
 
