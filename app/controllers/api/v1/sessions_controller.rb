@@ -26,7 +26,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     resource = User.find_for_database_authentication(email: user_params[:email])
     sign_out(resource)
     resource.generate_authentication_token!
-    #sign_out(resource)
+    sign_out(resource)
     render :json=> { :success=>true }
   end
 
@@ -42,12 +42,12 @@ class Api::V1::SessionsController < Devise::SessionsController
     render :json=> {:success=>false, :message=>"Invalid Password"}, :status=>401
   end
 
-   def invalid_login_attempt_2
+  def invalid_login_attempt_2
     warden.custom_failure!
     render :json=> {:success=>false, :message=>"Invalid Email"}, :status=>401
   end
 
   def user_params
       params.fetch(:user, {}).permit(:email, :password)
-    end
+  end
 end
