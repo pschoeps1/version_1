@@ -25,7 +25,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   
   def destroy
     puts "1"
-    resource = User.find(user_params[:email])
+    resource = User.find_by_email(user_params[:email])
     puts 2
     sign_out(resource)
     puts 3
