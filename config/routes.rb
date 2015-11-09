@@ -7,7 +7,9 @@ Version1::Application.routes.draw do
       resources :users, :only => [:show, :update, :destroy] do
       	member do
           get 'dashboard'
-          delete 'session' => 'sessions#destroy'
+          devise_scope :user do
+            delete 'session' => 'sessions#destroy'
+          end
         end
       end
       resources :groups, :only => [:show]
