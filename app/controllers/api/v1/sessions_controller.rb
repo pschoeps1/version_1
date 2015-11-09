@@ -23,11 +23,15 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
   
   def destroy
+    puts 1
     resource = User.find_for_database_authentication(email: user_params[:email])
+    puts 2
     sign_out(resource)
+    puts 3
     resource.generate_authentication_token!
-    sign_out(resource)
+    puts 4
     render :json=> { :success=>true }
+    puts 5
   end
 
   protected
