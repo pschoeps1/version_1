@@ -23,8 +23,8 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
   
   def destroy
-    puts 1
-    resource = User.find_for_database_authentication(email: user_params[:email])
+    puts "1"
+    resource = User.find(email: user_params[:email])
     puts 2
     sign_out(resource)
     puts 3
