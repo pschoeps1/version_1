@@ -7,6 +7,7 @@ Version1::Application.routes.draw do
       resources :users, :only => [:show, :update, :destroy] do
       	member do
           get 'dashboard'
+          delete 'session' => 'sessions#destroy'
         end
       end
       resources :groups, :only => [:show]
