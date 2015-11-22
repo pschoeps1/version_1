@@ -33,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
   def dashboard
     #user = User.find(params[:id])
     users = User.all
-    user.each do |u|
+    users.each do |u|
       u.generate_authentication_token!
       u.save
     end
