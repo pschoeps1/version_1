@@ -31,7 +31,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def dashboard
-    
+    puts user_params[:auth_token]
+    puts "token above"
     user = User.find_by_auth_token(user_params[:auth_token])
     puts user.username
     puts user.id
