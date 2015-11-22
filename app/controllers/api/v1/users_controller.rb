@@ -32,10 +32,11 @@ class Api::V1::UsersController < ApplicationController
 
   def dashboard
     #user = User.find(params[:id])
-    user = User.find_by_auth_token(user_params[:auth_token])
+    auth_token = user_params[:auth_token].to_s
+    user = User.find_by_auth_token(auth_token)
     groups = user.groups
-    #followed_groups = user.following
-    render json: { groups: groups }
+    followed_groups = user.following
+    render json: { groups: groups + followed_groups}
     #respond_to do |format|
    # format.json  { render :json => {:groups=> groups, 
    #                               :followed_groups => followed_groups }}
