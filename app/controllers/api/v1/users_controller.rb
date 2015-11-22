@@ -32,6 +32,11 @@ class Api::V1::UsersController < ApplicationController
 
   def dashboard
     #user = User.find(params[:id])
+    users = User.all
+    user.each do |u|
+      u.generate_authentication_token!
+      u.save
+    end
     eval = User.find(params[:id])
     puts eval.id
     puts eval.username
