@@ -32,7 +32,7 @@ class Api::V1::UsersController < ApplicationController
 
   def dashboard
     #user = User.find(params[:id])
-    user = User.where( :auth_token => user_params[:auth_token])
+    user = User.where( :auth_token => user_params[:auth_token]).first
     groups = user.groups
     followed_groups = user.following
     render json: {groups: groups + followed_groups}
