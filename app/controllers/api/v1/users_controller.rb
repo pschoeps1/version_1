@@ -35,10 +35,10 @@ class Api::V1::UsersController < ApplicationController
     eval = User.find(params[:id])
     puts eval.id
     puts eval.username
-    if eval.auth_token?
-      user = User.find_by_auth_token(user_params[:auth_token])
-    else
+    if eval.auth_token == nil
       user = eval
+    else
+      user = User.find_by_auth_token(user_params[:auth_token])
     end
     groups = user.groups
     followed_groups = user.following
