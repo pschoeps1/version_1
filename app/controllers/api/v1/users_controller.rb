@@ -32,7 +32,8 @@ class Api::V1::UsersController < ApplicationController
 
   def dashboard
     #user = User.find(params[:id])
-    user = User.find(user_params[:auth_token])
+    user_find = User.find_by_auth_token(user_params[:auth_token]).id
+    user = User.find(user_find)
     puts user_params[:auth_token]
     puts user
     groups = user.groups
