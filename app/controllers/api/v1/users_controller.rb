@@ -32,7 +32,12 @@ class Api::V1::UsersController < ApplicationController
 
   def dashboard
     #user = User.find(params[:id])
-    user_find = User.find_by_auth_token(user_params[:auth_token]).id
+    eval = User.find(user_params[:id])
+    if eval.auth_token
+      user = User.find_by_auth_token(user_params[:auth_token])
+    else
+      user = eval
+    end
     puts user_find
     user = User.find(user_find)
     puts user_params[:auth_token]
