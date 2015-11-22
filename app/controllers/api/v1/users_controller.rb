@@ -31,20 +31,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def dashboard
-    #user = User.find(params[:id])
-    users = User.all
-    users.each do |u|
-      u.generate_authentication_token!
-      u.save
-    end
-    eval = User.find(params[:id])
-    puts eval.id
-    puts eval.username
-    if eval.auth_token == nil
-      user = eval
-    else
-      user = User.find_by_auth_token(user_params[:auth_token])
-    end
+    
+    user = User.find_by_auth_token(user_params[:auth_token])
     puts user.username
     puts user.id
     groups = user.groups
