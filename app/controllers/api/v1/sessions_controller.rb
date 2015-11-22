@@ -24,7 +24,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
   
   def destroy
-    puts "1"
     resource = User.find_by_email(user_params[:email])
     sign_out(resource)
     resource.generate_authentication_token!
