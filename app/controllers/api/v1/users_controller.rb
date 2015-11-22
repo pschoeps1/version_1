@@ -40,6 +40,8 @@ class Api::V1::UsersController < ApplicationController
     else
       user = User.find_by_auth_token(user_params[:auth_token])
     end
+    puts user.username
+    puts user.id
     groups = user.groups
     followed_groups = user.following
     render json: { groups: groups + followed_groups}
