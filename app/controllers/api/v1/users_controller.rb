@@ -38,10 +38,6 @@ class Api::V1::UsersController < ApplicationController
     else
       user = eval
     end
-    puts user_find
-    user = User.find(user_find)
-    puts user_params[:auth_token]
-    puts user.username
     groups = user.groups
     followed_groups = user.following
     render json: { groups: groups + followed_groups}
