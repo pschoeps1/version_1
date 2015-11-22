@@ -33,9 +33,10 @@ class Api::V1::UsersController < ApplicationController
   def dashboard
     #user = User.find(params[:id])
     user_find = User.find_by_auth_token(user_params[:auth_token]).id
+    puts user_find
     user = User.find(user_find)
     puts user_params[:auth_token]
-    puts user
+    puts user.username
     groups = user.groups
     followed_groups = user.following
     render json: { groups: groups + followed_groups}
