@@ -6,7 +6,7 @@ class Api::V1::FlagsController < ApplicationController
     resource = User.find_by_auth_token(auth_token: params[:auth_token])
     flag.user_id = resource.id
     flag.reporter_id = params[:reporter_id]
-    flag.content = params[:content]
+    #flag.content = params[:content]
 
     if flag.save
       render :json=> {:success=>true}
@@ -16,6 +16,6 @@ class Api::V1::FlagsController < ApplicationController
   end
 
   def flag_params
-      params.require(:flag).permit(:user_id, :reporter_id, :auth_token, :content)
+      params.require(:flags).permit(:user_id, :reporter_id, :auth_token)
   end
 end
