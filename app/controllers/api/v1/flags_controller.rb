@@ -1,4 +1,5 @@
 class Api::V1::FlagsController < ApplicationController
+	respond_to :json
 
   def create
     flag = Flag.new
