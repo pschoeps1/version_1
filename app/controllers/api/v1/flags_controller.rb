@@ -2,7 +2,7 @@ class Api::V1::FlagsController < ApplicationController
 	respond_to :json
 
   def create
-    flag = Flag.new(flag_params)
+    flag = Flag.new
     resource = User.find_by_auth_token(auth_token: params[:auth_token])
     flag.user_id = resource.id
     flag.reporter_id = params[:reporter_id]
