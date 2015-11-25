@@ -14,10 +14,6 @@ class Api::V1::FlagsController < ApplicationController
       render :json => {:success=>false}, :status=>401
     end
   end
-  
-
-  def show
-  end
 
   def flag_params
       params.require(:flag).permit(:user_id, :reporter_id, :auth_token, :content)
