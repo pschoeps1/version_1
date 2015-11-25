@@ -1,4 +1,4 @@
-class FlagsControllerController < ApplicationController
+class Api::V1::FlagsController < ApplicationController
   def create
     flag = Flag.new
     resource = User.find_by_auth_token(auth_token: user_params[:auth_token])
