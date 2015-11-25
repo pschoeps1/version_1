@@ -16,6 +16,6 @@ class Api::V1::FlagsController < ApplicationController
   end
 
   def flag_params
-      params.require(:flags).permit(:user_id, :reporter_id, :auth_token)
+      params.require(:flag).permit(:user_id, :reporter_id, :auth_token)
   end
 end
