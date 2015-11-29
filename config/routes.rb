@@ -17,7 +17,7 @@ Version1::Application.routes.draw do
       resources :groups, :only => [:show]
       resources :posts, :only => [:show]
       resources :flags, :only => [:create]
-      resrouces :relationships, :only => [:destroy]
+      resources :relationships, :only => [:destroy]
       devise_for :users, controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
       #resources :sessions, :only => [:create, :destroy]
   end
