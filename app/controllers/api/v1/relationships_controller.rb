@@ -2,8 +2,9 @@ class Api::V1::RelationshipsController < ApplicationController
 
 def destroy
 	@user = User.find_by_auth_token(params[:auth_token]).id
-    @relationship = Relationship.find_by_follower_id_and_followed_id(@user, params[:followed_id]).destroy
-    
+	puts @user
+    @relationship = Relationship.where(:follower_id=>@user).where(:followed_id=>params[:followed_id]).first
+    @relationship.destroy
     if @relationship.destroy
       render :json=> {:success=>true}
     else
