@@ -31,11 +31,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def dashboard
-    puts params[:auth_token]
-    puts "token above"
     user = User.find_by_auth_token(params[:auth_token])
-    puts user.username
-    puts user.id
     groups = user.groups
     followed_groups = user.following
     render json: { groups: groups + followed_groups}
