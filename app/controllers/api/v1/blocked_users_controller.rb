@@ -12,4 +12,15 @@ class Api::V1::BlockedUsersController < ApplicationController
         render :json=> { :success=>false }, :status=>422
       end
     end
+
+    def destroy
+    	user = User.find_by_auth_token(params[:auth_token]).id
+    	relationship = BlockedUser.find_by_blocked_id_and_blocker_id(params[:blocked_id], user)
+    	relationship.destroy
+
+    	if relationship.destroy
+    		render :json=> {:success=>true,}, :status=>201
+    	else
+    		render :json => { :success=>false}, :status=>422
+    	end
 end
