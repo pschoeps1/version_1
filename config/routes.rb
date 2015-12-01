@@ -18,7 +18,6 @@ Version1::Application.routes.draw do
       resources :posts, :only => [:show]
       resources :flags, :only => [:create]
       resources :blocked_users, :only => [:create]
-      match 'blocked_users/show'    => 'blocked_users#show', :via => :get
       match 'relationships/destroy' => 'relationships#destroy', :via => :delete
       devise_for :users, controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
       #resources :sessions, :only => [:create, :destroy]
