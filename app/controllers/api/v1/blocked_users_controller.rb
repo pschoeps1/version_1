@@ -15,7 +15,7 @@ class Api::V1::BlockedUsersController < ApplicationController
 
     def destroy
     	user = User.find_by_auth_token(params[:auth_token]).id
-    	relationship = BlockedUser.find_by_blocked_id_and_blocker_id(params[:blocked_id], user)
+    	relationship = BlockedUser.where(:blocker_id=>user).where(:blocked_id=>params[:blocked_id]).first
     	relationship.destroy
 
     	if relationship.destroy
