@@ -15,10 +15,9 @@ class Api::V1::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(user_params[:password])
       sign_in("user", resource)
-      blocked_users = BlockedUser.where(:blocker_id => resource.id)
       resource.generate_authentication_token!
       resource.save
-      render :json=> {:success=>true, :auth_token=>resource.auth_token, :email=>resource.email, :user_id=>resource.id, :user_name=>resource.username, :blocked_users=>blocked_users }
+      render :json=> {:success=>true, :auth_token=>resource.auth_token, :email=>resource.email, :user_id=>resource.id, :user_name=>resource.username }
       return
     end
     invalid_login_attempt
