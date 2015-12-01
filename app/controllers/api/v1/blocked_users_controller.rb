@@ -18,9 +18,9 @@ class Api::V1::BlockedUsersController < ApplicationController
     	blocked_users = BlockedUser.where(:blocker_id => user.id)
 
     	if blocked_users
-    		render :json=> { blocked_users: blocked_users}
+    		render :json=> { blocked_users: blocked_users }
     	else
-    		render :json => {"none"}
+    		render :json => { blocked_users: nil }
     	end
     end
 end
