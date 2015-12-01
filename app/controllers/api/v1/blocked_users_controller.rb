@@ -23,4 +23,5 @@ class Api::V1::BlockedUsersController < ApplicationController
     	else
     		render :json => { :success=>false}, :status=>422
     	end
+    end
 end
