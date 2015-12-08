@@ -44,7 +44,7 @@ class Api::V1::UsersController < ApplicationController
 
   def notifications
     group = Group.find_by_chat_id(params[:chat_id])
-    users = Following.where(:followed_id => group.id)
+    users = Relationship.where(:followed_id => group.id)
     users_id = []
     users.each do |u|
       User.find(u.following_id).id << users_id
