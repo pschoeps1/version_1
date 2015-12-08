@@ -49,7 +49,7 @@ class Api::V1::UsersController < ApplicationController
     users.each do |u|
       User.find(u.following_id).id << users_id
     end
-    render json: { users_id }
+    render json: { users: users_id }
   end
 
   private
