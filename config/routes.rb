@@ -7,6 +7,7 @@ Version1::Application.routes.draw do
       resources :users, :only => [:show, :update, :destroy] do
       	member do
           get 'dashboard'
+          get 'notifications'
         end
       end
       #needed to specify sign out path because it was incorrectly routing upon deployment
@@ -20,7 +21,7 @@ Version1::Application.routes.draw do
       resources :blocked_users, :only => [:create]
       match 'relationships/destroy' => 'relationships#destroy', :via => :delete
       match 'blocked_users/destroy' => 'blocked_users#destroy', :via => :delete
-      match 'users/notifications' => 'users#notifications',     :via => :get
+      #match 'users/notifications' => 'users#notifications',     :via => :get
       devise_for :users, controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
       #resources :sessions, :only => [:create, :destroy]
   end
