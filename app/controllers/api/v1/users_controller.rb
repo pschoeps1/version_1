@@ -42,6 +42,16 @@ class Api::V1::UsersController < ApplicationController
    # end
   end
 
+  def notifications
+    group = Group.find(params[:chat_id])
+    users = Following.where(:followed_id => group.id)
+    users_id = []
+    users.each do |u|
+      User.find(u.following_id).id << users_id
+    end
+    render json: { users_id }
+  end
+
   private
 
     def user_params
