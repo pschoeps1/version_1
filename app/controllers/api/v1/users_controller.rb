@@ -43,7 +43,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def notifications
-    group = Group.find(params[:chat_id])
+    group = Group.find_by_chat_id(params[:chat_id])
     users = Following.where(:followed_id => group.id)
     users_id = []
     users.each do |u|
