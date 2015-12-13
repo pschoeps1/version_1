@@ -53,7 +53,7 @@ class Api::V1::UsersController < ApplicationController
         user_tokens << t.token
       end
     end
-    render json: { users: users_id }
+    render json: { users: user_tokens }
   end
 
   private
