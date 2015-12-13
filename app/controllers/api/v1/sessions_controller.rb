@@ -13,6 +13,16 @@ class Api::V1::SessionsController < Devise::SessionsController
     resource = User.find_for_database_authentication(email: user_params[:email])
     return invalid_login_attempt_2 unless resource
 
+    device_id = user_params(:device_id)
+    if device_id
+      registered_device = Device.find_by_token(device_id)
+      if registered_device
+        #do nothing
+      else
+        Device.create(device_id, resource.id)
+      end
+    end
+
     if resource.valid_password?(user_params[:password])
       sign_in("user", resource)
       resource.generate_authentication_token!

@@ -9,8 +9,10 @@ class User < ActiveRecord::Base
                                   dependent:   :destroy
 
   has_many :following, through: :relationships, source: :followed
+  has_many :devices, dependent: :destroy
   #validates :auth_token, uniqueness: true
   validates :email,      uniqueness: true
+
 
   before_create :generate_authentication_token!
 

@@ -19,6 +19,7 @@ Version1::Application.routes.draw do
       resources :posts, :only => [:show]
       resources :flags, :only => [:create]
       resources :blocked_users, :only => [:create]
+      resources :devices, :only => [:create]
       match 'relationships/destroy' => 'relationships#destroy', :via => :delete
       match 'blocked_users/destroy' => 'blocked_users#destroy', :via => :delete
       #match 'users/notifications' => 'users#notifications',     :via => :get
