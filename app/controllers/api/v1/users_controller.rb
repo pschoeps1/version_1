@@ -44,13 +44,18 @@ class Api::V1::UsersController < ApplicationController
 
   def notifications
     group = Group.find_by_chat_id(params[:chat_id])
-    users = Relationship.where(:followed_id => group.id)
+    puts group.id
+    relationships = Relationship.where(:followed_id => group.id)
     user_tokens = []
-    users.each do |u|
-      #users_id <<0 User.find(u.follower_id).id 
-      user_tokens = User.find(u.follower_id).devices
-      user_tokens.each do |t|
-        user_tokens << t.token
+    relationships.each do |u|
+      user = User.find(u.follower_id)
+      puts "username"
+      puts user.username
+      devices = user.devices
+      devices.each do |d|
+        puts "token"
+        puts d.token
+        user_tokens << d.token
       end
     end
     render json: { users: user_tokens }
