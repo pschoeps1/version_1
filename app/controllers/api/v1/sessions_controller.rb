@@ -13,7 +13,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     resource = User.find_for_database_authentication(email: user_params[:email])
     return invalid_login_attempt_2 unless resource
 
-    device_id = user_params(:device_id)
+    device_id = user_params(:device_id) if user_params(:device_id)
     if device_id
       registered_device = Device.find_by_token(device_id)
       if registered_device
@@ -58,6 +58,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def user_params
-      params.fetch(:user, {}).permit(:email, :password, :auth_token)
+      params.fetch(:user, {}).permit(:email, :password, :auth_token, :device_id)
   end
 end
