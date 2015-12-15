@@ -47,7 +47,7 @@ class Api::V1::UsersController < ApplicationController
     owner = User.find(group.user_id)
     puts group.id
     relationships = Relationship.where(:followed_id => group.id)
-    user_tokens = []
+    user_tokens = {}
     relationships.each do |u|
       user = User.find(u.follower_id)
       puts "username"
