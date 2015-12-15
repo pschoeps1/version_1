@@ -44,6 +44,7 @@ class Api::V1::UsersController < ApplicationController
 
   def notifications
     group = Group.find_by_chat_id(params[:chat_id])
+    group_name = group.name
     owner = User.find(group.user_id)
     puts group.id
     relationships = Relationship.where(:followed_id => group.id)
@@ -63,7 +64,7 @@ class Api::V1::UsersController < ApplicationController
     owner_devices.each do |o|
       user_tokens << o.token
     end
-    render json: { users: user_tokens }
+    render json: { users: user_tokens, group_name: group_name }
   end
 
   private
