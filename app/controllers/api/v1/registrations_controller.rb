@@ -4,7 +4,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   def create
 
     user = User.new
-    user.name = user_params[:name]
+    user.username = user_params[:username]
     user.password = user_params[:password]
     user.password_confirmation = user_params[:password_confirmation]
     user.email = user_params[:email]
@@ -13,7 +13,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       return
     else
       warden.custom_failure!
-      render :json=> user.errors, :status=>422
+      render :json=> user.errors, :status=>401
     end
   end
 
