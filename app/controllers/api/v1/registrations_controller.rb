@@ -18,7 +18,8 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       return
     else
       warden.custom_failure!
-      render :json=> user.errors, :status=>401
+      puts user.errors
+      render :json=> { :success=>false, :user_errors=> user.errors}, :status=>401
     end
   end
 
