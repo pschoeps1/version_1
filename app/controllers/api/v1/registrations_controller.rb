@@ -3,6 +3,11 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 
   def create
 
+    check_email = User.find_by_email(user_params[:email])
+    if check_email
+      email_taken
+    end
+
     user = User.new
     user.username = user_params[:username]
     user.password = user_params[:password]
@@ -16,6 +21,9 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       render :json=> user.errors, :status=>401
     end
   end
+
+  def email_taken
+    render :json => { :success=> false }, :status=>599
 
   def user_params
       params.fetch(:user, {}).permit(:email, :password, :password_confirmation, :username)
