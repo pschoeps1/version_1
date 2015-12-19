@@ -2,9 +2,10 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 	respond_to :json
 
   def create
-
-    if User.find_by_email(user_params[:email])
-      render :json=>{email: "invalid"}, :status=>599
+    check_email = User.find_by_email(user_params[:email])
+    puts check_email
+    if check_email
+      render :json=>{email: "taken"}, :status=>599
     else
 
     user = User.new
