@@ -24,6 +24,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 
   def email_taken
     render :json => { :success=> false }, :status=>599
+  end
 
   def user_params
       params.fetch(:user, {}).permit(:email, :password, :password_confirmation, :username)
