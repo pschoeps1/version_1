@@ -3,10 +3,9 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 
   def create
 
-    check_email = User.find_by_email(user_params[:email])
-    if check_email
-      email_taken
-    end
+    if User.find_by_email(user_params[:email])
+      render :json=>{email: "invalid"}, :status=>599
+    else
 
     user = User.new
     user.username = user_params[:username]
@@ -21,10 +20,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       puts user.errors
       render :json=> { :success=>false, :user_errors=> user.errors}, :status=>401
     end
-  end
-
-  def email_taken
-    render :json => { :success=> false }, :status=>599
+    end
   end
 
   def user_params
