@@ -51,12 +51,8 @@ class Api::V1::UsersController < ApplicationController
     user_tokens = []
     relationships.each do |u|
       user = User.find(u.follower_id)
-      puts "username"
-      puts user.username
       devices = user.devices
       devices.each do |d|
-        puts "token"
-        puts d.token
         user_tokens << d.token
       end
     end

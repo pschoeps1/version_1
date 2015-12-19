@@ -4,8 +4,12 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   def create
 
     user = User.new(user_params)
+    #user.name = user_params[:name]
+    #user.password = user_params[:password]
+    #user.password_confirmation = user_params[:password_confirmation]
+    #user.email = user_params[:email]
     if user.save
-      render :json=> { :auth_token=>user.auth_token, :email=>user.email, :id=>user.id, :first_name=>user.first_name, :last_name=>user.last_name }, :status=>201
+      render :json=> { :success=> true, :auth_token=>user.auth_token, :email=>user.email, :user_id=>user.id, :user_name=>user.username }, :status=>201
       return
     else
       warden.custom_failure!
@@ -14,6 +18,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-      params.fetch(:user, {}).permit(:email, :password, :password_confirmation)
+      params.fetch(:user, {}).permit(:email, :password, :password_confirmation, :name)
     end
 end
