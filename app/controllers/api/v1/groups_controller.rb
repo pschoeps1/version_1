@@ -11,7 +11,7 @@ class Api::V1::GroupsController < ApplicationController
 	  	puts params[:search]
 	    #@groups = Group.search(params[:search]).where(:privacy => false)
 	    search = params[:search]
-	    @groups = Group.where('name LIKE ?', "%#{search}%")
+	    @groups = Group.where('name LIKE ?', "%#{search}%").where(:privacy => false)
 	  else
 	  	@groups = Group.where(:privacy=>false).last(20).reverse
 	  end
@@ -21,9 +21,6 @@ class Api::V1::GroupsController < ApplicationController
 	  		joined_groups << g.id
 	  	end
 	  end
-      #@user = current_user
-      #@group_show = @user.groups.where(params[:privacy], false)
-      #@group_find = Group.find_by_id(params[:id])
       render :json=> { :groups => @groups, :joined => joined_groups }
 	end
 
