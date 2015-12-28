@@ -8,7 +8,7 @@ class Api::V1::GroupsController < ApplicationController
 	  if params[:query]
 	    @groups = Group.search(params[:query]).where(:privacy => false)
 	  else
-	  	@groups = Group.where(:privacy=>false, :order => "id desc", :limit => 20).reverse
+	  	@groups = Group.where(:privacy=>false, :limit => 20).reverse
 	  end
       #@user = current_user
       #@group_show = @user.groups.where(params[:privacy], false)
