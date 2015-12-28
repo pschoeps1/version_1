@@ -5,10 +5,10 @@ class Api::V1::GroupsController < ApplicationController
 	end
 
 	def index
-	  if params[:query]
+	  if (params[:query]).present?
 	    @groups = Group.search(params[:query]).where(:privacy => false)
 	  else
-	  	@groups = Group.where(:privacy=>false, :limit => 20).reverse
+	  	@groups = Group.where(:privacy=>false).last(20).reverse
 	  end
       #@user = current_user
       #@group_show = @user.groups.where(params[:privacy], false)
