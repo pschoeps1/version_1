@@ -11,5 +11,14 @@ class Group < ActiveRecord::Base
    default_scope -> { order(created_at: :desc) }
    validates :user_id, presence: true
    validates :name, presence: true, length: { maximum: 35 }
-   #validates :teacher, presence: true, length: { maximum: 30 }
+
+
+
+   def self.search(search)
+    if search
+      self.where('name LIKE ?', "%#{search}%")
+    else
+      self.all
+    end
+  end
 end
