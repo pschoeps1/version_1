@@ -13,16 +13,16 @@ class Api::V1::GroupsController < ApplicationController
 	  else
 	  	@groups = Group.where(:privacy=>false).last(20).reverse
 	  end
-	  new_groups = []
+	  joined_groups = []
 	  @groups.each do |g|
-	  	unless g.user_id = user.id || Relationship.find(:followed_id=> g.id, :follower_id=> user.id)
-	  		new_groups << g
+	  	if g.user_id == user.id || Relationship.find(:followed_id=> g.id, :follower_id=> user.id)
+	  		joined_groups << g.id
 	  	end
 	  end
       #@user = current_user
       #@group_show = @user.groups.where(params[:privacy], false)
       #@group_find = Group.find_by_id(params[:id])
-      render :json=> { :groups => new_groups}
+      render :json=> { :groups => @groups, :joined => joined_groups }
 	end
 
 end
