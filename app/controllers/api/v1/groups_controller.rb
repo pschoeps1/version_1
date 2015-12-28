@@ -6,7 +6,8 @@ class Api::V1::GroupsController < ApplicationController
 
 	def index
 	  if (params[:query]).present?
-	    @groups = Group.search(params[:query]).where(:privacy => false)
+	  	puts params[:search]
+	    @groups = Group.search(params[:search]).where(:privacy => false)
 	  else
 	  	@groups = Group.where(:privacy=>false).last(20).reverse
 	  end
