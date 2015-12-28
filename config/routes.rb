@@ -15,7 +15,7 @@ Version1::Application.routes.draw do
         delete 'sign_out' => 'sessions#destroy'
       end
 
-      resources :groups, :only => [:show]
+      resources :groups, :only => [:show, :index]
       resources :posts, :only => [:show]
       resources :flags, :only => [:create]
       resources :blocked_users, :only => [:create]
