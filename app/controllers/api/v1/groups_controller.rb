@@ -9,7 +9,9 @@ class Api::V1::GroupsController < ApplicationController
 	  user_groups = user.groups
 	  if (params[:search])
 	  	puts params[:search]
-	    @groups = Group.search(params[:search]).where(:privacy => false)
+	    #@groups = Group.search(params[:search]).where(:privacy => false)
+	    search = prams[:search]
+	    @groups = Group.where('name LIKE ?', "%#{search}%")
 	  else
 	  	@groups = Group.where(:privacy=>false).last(20).reverse
 	  end
