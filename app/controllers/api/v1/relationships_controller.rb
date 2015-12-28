@@ -1,7 +1,7 @@
 class Api::V1::RelationshipsController < ApplicationController
 
 def destroy
-	@user = User.find_by_auth_token(params[:follower_id]).id
+	@user = User.find_by_auth_token(params[:auth_token]).id
 	puts @user
     @relationship = Relationship.where(:follower_id=>@user).where(:followed_id=>params[:followed_id]).first
     @relationship.destroy
