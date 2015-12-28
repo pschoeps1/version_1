@@ -11,4 +11,19 @@ def destroy
       render :json => {:success=>false}, :status=>401
     end
 end
+
+def create
+	follower_id = User.find(params[:auth_token]).id
+	followed_id = params[:followed_id]
+	relationship = Relationship.new
+	relationship.follower_id = follower_id
+	relationship.followed_id = followed_id
+	relationship.save
+
+	if relationship.save
+		render :json=> {:success=>true}
+	else
+		render :json=> {:success=>false}
+	end
+end
 end
