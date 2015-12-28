@@ -15,7 +15,7 @@ class Api::V1::GroupsController < ApplicationController
 	  end
 	  joined_groups = []
 	  @groups.each do |g|
-	  	if g.user_id == user.id || Relationship.find_by_followed_id_and_follower_id(:followed_id=> g.id, :follower_id=> user.id)
+	  	if g.user_id == user.id || Relationship.find_by_followed_id_and_follower_id(g.id, user.id)
 	  		joined_groups << g.id
 	  	end
 	  end
