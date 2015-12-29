@@ -24,4 +24,21 @@ class Api::V1::GroupsController < ApplicationController
       render :json=> { :groups => @groups, :joined => joined_groups }
 	end
 
+	def create
+		group = Group.new
+		group.name = params[:group_name]
+		group.teacher = params[:group_owner] if params[:group_owner]
+		group.user_id = User.find_by_auth_token(params[:auth_token]).id
+		group.chat_id = params[:chat_id]
+		group.privacy = params[:privacy]
+		group.description = params[:group_description] if params[:group_description]
+		group.members_can_edit = params[:members_events]
+
+		if group.save
+			render :json => { :success => true }
+		else
+			render :json => { :success => false }
+		end
+	end
+
 end
