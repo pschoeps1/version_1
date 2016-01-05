@@ -37,7 +37,23 @@ class Api::V1::GroupsController < ApplicationController
 		if group.save
 			render :json => { :success => true }
 		else
-			render :json => { :success => false }
+			render :json => { :success => false }, :status=>401
+		end
+	end
+
+	def edit
+		group = Group.find(params[:group_id])
+		group.name = params[:group_name]
+		group.teacher = params[:group_owner] if params[:group_owner]
+		group.privacy = params[:privacy]
+		group.description = params[:group_description] if params[:group_description]
+		group.members_can_edit = params[:members_events]
+		group.save
+
+		if group.save
+			render :json => { :success => true }
+		else
+			render :json => { :success => false }, :status=>401
 		end
 	end
 
