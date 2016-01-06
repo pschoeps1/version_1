@@ -20,9 +20,10 @@ Version1::Application.routes.draw do
       resources :flags, :only => [:create]
       resources :blocked_users, :only => [:create]
       resources :devices, :only => [:create]
-      match 'relationships/destroy' => 'relationships#destroy', :via => :delete
-      match 'relationships/create'  => 'relationships#create',  :via => :get
-      match 'blocked_users/destroy' => 'blocked_users#destroy', :via => :delete
+      match 'relationships/destroy'   => 'relationships#destroy',    :via => :delete
+      match 'relationships/create'    => 'relationships#create',     :via => :get
+      match 'blocked_users/destroy'   => 'blocked_users#destroy',    :via => :delete
+      match 'groups/multiple_invites' => 'groups#multiple_invites'   :via => :get
       #match 'users/notifications' => 'users#notifications',     :via => :get
       devise_for :users, controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
       #resources :sessions, :only => [:create, :destroy]

@@ -57,4 +57,36 @@ class Api::V1::GroupsController < ApplicationController
 		end
 	end
 
+	def multiple_invites
+    @user = current_user
+    #split emails by comma and determine if the recipient is a new or existing user, send emails to each, also check to see if a relationship already exists for that user
+    if params[:multiple_invites].present?
+      emails = params[:multiple_invites].split(', ') 
+      emails.each do |email|
+        @invite = Invite.new # Make a new Invite
+        @group = Group.find(params[:group_id])
+        @invite.sender_id = current_user.id # set the sender to the current user
+        @invite.sender_name = current_user.username
+        @invite.group_name = @group.name
+        @invite.group_id = @group.id
+        @invite.email = email
+        if @invite.save
+          if @invite.recipient != nil
+            InviteMailer.existing_user_invite(@invite, new_user_session_path).deliver_now 
+             #Add the user to the user group
+             #check if a relationship exists, and if it does only send an email.
+               if @invite.recipient.relationships.exists? followed_id: @group.id || @invite.sender_id == @group.user_id
+               else
+                 @invite.recipient.relationships.create!(followed_id: @group.id)
+               end
+        else
+          #otherwise the recipient is a new user and needs to sign up with a token
+          InviteMailer.new_user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver_now
+        end
+      end
+      end
+      render :json => { :success => true }
+    end
+  end
+
 end
