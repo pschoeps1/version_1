@@ -9,7 +9,6 @@ class InviteMailer < ApplicationMailer
     @url = invite_url
     @sender_name = invite.sender_name
     @group_name =invite.group_name
-    @template.template_format = :html
 
     mail to: invite.email, subject: "#{invite.sender_name} has invited you to join the group #{invite.group_name}!"
   end
