@@ -60,7 +60,7 @@ class Api::V1::GroupsController < ApplicationController
 	def multiple_invites
     #split emails by comma and determine if the recipient is a new or existing user, send emails to each, also check to see if a relationship already exists for that user
     if params[:multiple_invites].present?
-      emails = params[:multiple_invites].split(', ') 
+      emails = params[:multiple_invites].split(', ')
       emails.each do |email|
         @invite = Invite.new # Make a new Invite
         @group = Group.find(params[:group_id])
