@@ -16,8 +16,8 @@ Version1::Application.routes.draw do
       end
 
       resources :groups, :only => [:show, :index, :create, :edit] do
-        get 'multiple_invites
-      end'
+        get 'multiple_invites'
+      end
       resources :posts, :only => [:show]
       resources :flags, :only => [:create]
       resources :blocked_users, :only => [:create]
