@@ -42,6 +42,19 @@ class Api::V1::GroupsController < ApplicationController
 		end
 	end
 
+	def destroy
+		user = User.find_by_auth_token(params[:auth_token])
+		if user != nil
+			group = Group.find(params[:group_id]).destroy
+		end
+
+		if group.destroy
+			render :json => { :success => true }
+		else
+			render :json => { :success => false }, :status=>401
+		end
+	end
+
 	def edit
 		group = Group.find(params[:group_id])
 		group.name = params[:group_name]

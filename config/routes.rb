@@ -15,7 +15,7 @@ Version1::Application.routes.draw do
         delete 'sign_out' => 'sessions#destroy'
       end
 
-      resources :groups, :only => [:show, :index, :create, :edit] do
+      resources :groups, :only => [:show, :index, :create, :edit, :destroy] do
         get 'multiple_invites'
       end
       resources :posts, :only => [:show]
