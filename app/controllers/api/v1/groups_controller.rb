@@ -58,6 +58,7 @@ class Api::V1::GroupsController < ApplicationController
 	end
 
 	def multiple_invites
+		respond_to :html
     #split emails by comma and determine if the recipient is a new or existing user, send emails to each, also check to see if a relationship already exists for that user
     if params[:multiple_invites].present?
       emails = params[:multiple_invites].split(', ')

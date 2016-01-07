@@ -1,4 +1,5 @@
 class Api::V1::InvitesController < ApplicationController
+  respond_to :html
    
   def create
      @invite = Invite.new(invite_params) # Make a new Invite
