@@ -15,7 +15,9 @@ Version1::Application.routes.draw do
         delete 'sign_out' => 'sessions#destroy'
       end
 
-      resources :groups, :only => [:show, :index, :create, :edit]
+      resources :groups, :only => [:show, :index, :create, :edit] do
+        get 'multiple_invites
+      end'
       resources :posts, :only => [:show]
       resources :flags, :only => [:create]
       resources :blocked_users, :only => [:create]
@@ -23,7 +25,7 @@ Version1::Application.routes.draw do
       match 'relationships/destroy'   => 'relationships#destroy',    :via => :delete
       match 'relationships/create'    => 'relationships#create',     :via => :get
       match 'blocked_users/destroy'   => 'blocked_users#destroy',    :via => :delete
-      match 'groups/multiple_invites' => 'groups#multiple_invites',   :via => :get
+      #match 'groups/multiple_invites' => 'groups#multiple_invites',   :via => :get
       #match 'users/notifications' => 'users#notifications',     :via => :get
       devise_for :users, controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
       #resources :sessions, :only => [:create, :destroy]

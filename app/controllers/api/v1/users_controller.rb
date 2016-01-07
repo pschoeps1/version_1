@@ -35,11 +35,7 @@ class Api::V1::UsersController < ApplicationController
     blocked_users = BlockedUser.where(:blocker_id => user.id)
     groups = user.groups
     followed_groups = user.following
-    render json: { groups: groups + followed_groups, blocked_users: blocked_users}
-    #respond_to do |format|
-   # format.json  { render :json => {:groups=> groups, 
-   #                               :followed_groups => followed_groups }}
-   # end
+    render json: { groups: groups + followed_groups, blocked_users: blocked_users }
   end
 
   def notifications
