@@ -72,7 +72,7 @@ class Api::V1::GroupsController < ApplicationController
         @invite.email = email
         if @invite.save
           if @invite.recipient != nil
-            InviteMailer.existing_user_invite(@invite, new_user_session_path).deliver_now 
+            InviteMailer.existing_user_invite(@invite, new_user_session_path).deliver
              #Add the user to the user group
              #check if a relationship exists, and if it does only send an email.
                if @invite.recipient.relationships.exists? followed_id: @group.id || @invite.sender_id == @group.user_id
@@ -81,7 +81,7 @@ class Api::V1::GroupsController < ApplicationController
                end
         else
           #otherwise the recipient is a new user and needs to sign up with a token
-          InviteMailer.new_user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver_now
+          InviteMailer.new_user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
         end
       end
       end
