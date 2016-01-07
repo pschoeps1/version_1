@@ -64,8 +64,8 @@ class Api::V1::GroupsController < ApplicationController
       emails.each do |email|
         @invite = Invite.new # Make a new Invite
         @group = Group.find(params[:group_id])
-        @invite.sender_id = current_user.id # set the sender to the current user
-        @invite.sender_name = current_user.username
+        @invite.sender_id = params[:user_id] # set the sender to the current user
+        @invite.sender_name = User.find(params[:user_id]).username
         @invite.group_name = @group.name
         @invite.group_id = @group.id
         @invite.email = email
