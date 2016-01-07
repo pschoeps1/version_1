@@ -45,7 +45,7 @@ class Api::V1::GroupsController < ApplicationController
 	def destroy
 		user = User.find_by_auth_token(params[:auth_token])
 		if user != nil
-			group = Group.find(params[:group_id]).destroy
+			group = Group.find(params[:id]).destroy
 		end
 
 		if group.destroy
