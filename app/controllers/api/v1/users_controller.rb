@@ -35,7 +35,7 @@ class Api::V1::UsersController < ApplicationController
     @friends = Friendship.where(:user_id => user.id)
     if (params[:search])
       search = params[:search]
-      @users = User.where('username LIKE ?', "%#{search}%") || ('email LIKE ?', "%#{search}%")
+      @users = User.where('username LIKE ?', "%#{search}%") || User.where('email LIKE ?', "%#{search}%")
     else
       @users = User.last(20).reverse
     end
