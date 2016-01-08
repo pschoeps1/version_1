@@ -42,8 +42,6 @@ class Api::V1::UsersController < ApplicationController
     render :json => { :users => @users, :friends => @friends }
   end
 
-  end
-
   def dashboard
     user = User.find_by_auth_token(params[:auth_token])
     blocked_users = BlockedUser.where(:blocker_id => user.id)
