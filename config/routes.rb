@@ -33,6 +33,7 @@ Version1::Application.routes.draw do
       match 'relationships/destroy'   => 'relationships#destroy',    :via => :delete
       match 'relationships/create'    => 'relationships#create',     :via => :get
       match 'blocked_users/destroy'   => 'blocked_users#destroy',    :via => :delete
+      match 'friendships/create'      => 'friendships#create',       :via => :get
       #match 'groups/multiple_invites' => 'groups#multiple_invites',   :via => :get
       #match 'users/notifications' => 'users#notifications',     :via => :get
       devise_for :users, controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
