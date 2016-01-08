@@ -28,6 +28,15 @@ class User < ActiveRecord::Base
     Relationship.exists? follower_id: id, followed_id: group.id
   end
 
+  def self.search(search)
+    if search
+      self.where('username LIKE ?', "%#{search}%") 
+      self.where('email LIKE ?', "%#{search}%")
+    else
+      self.all
+    end
+  end
+
   def as_json(options={})
   super(:only => [:name, :email])
 end

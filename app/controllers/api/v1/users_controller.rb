@@ -30,6 +30,20 @@ class Api::V1::UsersController < ApplicationController
     head 204
   end
 
+  def index
+    user = User.find(params[:user_id])
+    @friends = Friendship.where(:user_id => user.id)
+    if (params[:search])
+      search = params[:search]
+      @users = User.where('username LIKE ?', "%#{search}%") || ('email LIKE ?', "%#{search}%")
+    else
+      @users = User.last(20).reverse
+    end
+    render :json => { :users => @users, :friends => @friends }
+  end
+
+  end
+
   def dashboard
     user = User.find_by_auth_token(params[:auth_token])
     blocked_users = BlockedUser.where(:blocker_id => user.id)
