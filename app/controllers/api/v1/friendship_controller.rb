@@ -4,7 +4,8 @@ class Api::V1::FriendshipsController < ApplicationController
     #send a friend request
     def create
         Friendship.request(@user, @friend)
-        render :json => { :success => true }
+        @friend = Friendship.find_by_user_id_and_friend_id(@user, @friend)
+        render :json => { :success => true, :new_friend => @friend }
     end
     
     def accept
@@ -31,7 +32,7 @@ class Api::V1::FriendshipsController < ApplicationController
     
     def setup_friends
         @friend = User.find(params[:friend_id])
-        @user = User.find(params[:user_id])
+        @user = User.find_by_auth_token(params[:auth_token])
     end
 
 end
