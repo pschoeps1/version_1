@@ -9,10 +9,10 @@ class Api::V1::FriendshipsController < ApplicationController
     end
     
     def index
-        user = User.find_by_auth_token(params[:auth_token])
-        @friendships = Friendship.where(:user_id => user.id).where(:status => "accepted")
+        @friendships = Friendship.where(:user_id => @user.id)
+        @friendships_accepted = @friendships.where(:status => "accepted")
         @friends = []
-        @friendships.each do |f|
+        @friendships_accepted.each do |f|
             user = User.find(f.friend_id)
             @friends << user
         end
