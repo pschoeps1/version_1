@@ -13,7 +13,12 @@ def destroy
 end
 
 def create
-	follower_id = User.find_by_auth_token(params[:auth_token]).id
+	if params[:follower_id]
+		follower_id = User.find(follower_id).id
+	else
+	  follower_id = User.find_by_auth_token(params[:auth_token]).id
+	end
+
 	followed_id = params[:followed_id]
 	relationship = Relationship.new
 	relationship.follower_id = follower_id
