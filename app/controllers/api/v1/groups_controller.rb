@@ -78,7 +78,7 @@ class Api::V1::GroupsController < ApplicationController
 		  @relationships = Relationship.where(:followed_id => group.id)
 		  users = []
 		  @relationships.each do |r|
-		  	user = User.find(r.following.id)
+		  	user = User.find(r.follower_id)
 		  	users << user
 		  end
 		  render :json => { :members => users }
