@@ -19,7 +19,7 @@ Version1::Application.routes.draw do
         get 'multiple_invites'
       end
 
-      resources :friendships, :only => [:destroy] do 
+      resources :friendships, :only => [:destroy, :index] do 
          member do
            post 'accept'
            post 'decline'

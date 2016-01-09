@@ -20,8 +20,10 @@ def create
 	relationship.followed_id = followed_id
 	relationship.save
 
+	new_group_user = User.find(follower_id)
+
 	if relationship.save
-		render :json=> {:success=>true}
+		render :json=> {:success=>true, :new_group_user => new_group_user}
 	else
 		render :json=> {:success=>false}
 	end

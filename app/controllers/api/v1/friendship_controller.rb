@@ -8,6 +8,25 @@ class Api::V1::FriendshipsController < ApplicationController
         render :json => { :success => true, :new_friend => @friend }
     end
     
+    def index
+        user = User.find_by_auth_token(params[:auth_token])
+        @friendships = Friendship.where(:user_id => user.id).where(:status => "accepted")
+        @friends = []
+        @friendships.each do |f|
+            user = User.find(f.friend_id)
+            @friends << user
+        end
+        
+        @group_users
+        @relationships = Relationship.where(:group_id => params[:group_id])
+        @relationships.each do |r|
+            user = User.find(r.follower_id)
+            @group_users << user
+        end
+        render :json => { :friends => @friends, :group_users => @group_users }
+    end
+
+
     def accept
         if @user.requested_friends.include?(@friend)
             Friendship.accept(@user, @friend)
