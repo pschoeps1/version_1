@@ -75,7 +75,7 @@ class Api::V1::GroupsController < ApplicationController
 		user = User.find_by_auth_token(params[:auth_token])
 		if user
 		  group = Group.find(params[:group_id])
-		  @relationships = Relationship.where(:following_id => group.id)
+		  @relationships = Relationship.where(:followed_id => group.id)
 		  users = []
 		  @relationships.each do |r|
 		  	user = User.find(r.following.id)
