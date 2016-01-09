@@ -14,7 +14,9 @@ end
 
 def create
 	if params[:follower_id]
-		follower_id = User.find(follower_id).id
+		if User.find_by_auth_token(params[:auth_token])
+		  follower_id = User.find(params[:follower_id]).id
+		end
 	else
 	  follower_id = User.find_by_auth_token(params[:auth_token]).id
 	end
