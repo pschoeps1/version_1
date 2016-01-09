@@ -84,6 +84,7 @@ class Api::V1::GroupsController < ApplicationController
 		  render :json => { :members => users }
 		else
 		  render :json => { :members => "none" }
+		end
 	end
 
 	def multiple_invites
