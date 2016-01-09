@@ -71,6 +71,21 @@ class Api::V1::GroupsController < ApplicationController
 		end
 	end
 
+	def members
+		user = User.find_by_auth_token(params[:auth_token])
+		if user
+		  group = Group.find(params[:id])
+		  @relationships = Relationship.where(:following_id => group.id)
+		  users = []
+		  @relationships.each do |r|
+		  	user = User.find(r.following.id)
+		  	users << user
+		  end
+		  render :json => { :members => users }
+		else
+		  render :json => { :members => "none" }
+	end
+
 	def multiple_invites
     #split emails by comma and determine if the recipient is a new or existing user, send emails to each, also check to see if a relationship already exists for that user
     if params[:multiple_invites].present?

@@ -17,6 +17,7 @@ Version1::Application.routes.draw do
 
       resources :groups, :only => [:show, :index, :create, :edit, :destroy] do
         get 'multiple_invites'
+        get 'members'
       end
 
       resources :friendships, :only => [:destroy, :index] do 

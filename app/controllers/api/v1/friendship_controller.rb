@@ -17,7 +17,7 @@ class Api::V1::FriendshipsController < ApplicationController
             @friends << user
         end
         
-        @group_users
+        @group_users = []
         @relationships = Relationship.where(:followed_id => params[:group_id])
         @relationships.each do |r|
             user = User.find(r.follower_id)
