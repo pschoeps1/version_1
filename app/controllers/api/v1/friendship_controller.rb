@@ -50,7 +50,9 @@ class Api::V1::FriendshipsController < ApplicationController
     end
     
     def setup_friends
-        @friend = User.find(params[:friend_id])
+        if params[:friend_id]
+          @friend = User.find(params[:friend_id])
+        end
         @user = User.find_by_auth_token(params[:auth_token])
     end
 
