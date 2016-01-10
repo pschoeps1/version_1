@@ -10,6 +10,22 @@ class User < ActiveRecord::Base
 
   has_many :following, through: :relationships, source: :followed
   has_many :devices, dependent: :destroy
+
+  #friendships setup
+  has_many :friendships
+  has_many :friends, -> { where(friendships: {status: 'accepted'}).order('username DESC') },
+           :through => :friendships
+
+  
+  has_many :requested_friends, -> { where(friendships: {status: 'requested'}).order('created_at DESC') },
+           :through => :friendships,
+           :source => :friend
+  
+  has_many :pending_friends, -> { where(friendships: {status: 'pending'}).order('created_at DESC') },
+           :through => :friendships,
+           :source => :friend
+
+           
   #validates :auth_token, uniqueness: true
   validates :email,      uniqueness: true
 
