@@ -8,6 +8,7 @@ Version1::Application.routes.draw do
       	member do
           get 'dashboard'
           get 'notifications'
+          get 'inbox'
         end
       end
       #needed to specify sign out path because it was incorrectly routing upon deployment
