@@ -1,6 +1,4 @@
 class Api::V1::EventsController < ApplicationController
-  include MobileHelper
-   before_action :check_for_mobile
   
   
   def show
@@ -15,9 +13,14 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def index
-    @group = Group.find(params[:group_id])
-    @events = @group.events
-    render :json=> { :events => @events }
+    @user = User.find_by_auth_token(params[:auth_token])
+    if @user
+      @group = Group.find(params[:group_id])
+      @events = @group.events
+      render :json=> { :events => @events }
+    else 
+      #revoke access
+    end
   end
   
   
