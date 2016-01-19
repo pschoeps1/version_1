@@ -1,6 +1,7 @@
 class Group < ActiveRecord::Base
    belongs_to :user
-   #has_many :events, dependent: :destroy
+
+   has_many :events, dependent: :destroy
    
    has_many :relationships,        foreign_key: "followed_id",
                                    dependent:   :destroy
