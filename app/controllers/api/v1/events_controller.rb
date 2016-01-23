@@ -1,5 +1,5 @@
 class Api::V1::EventsController < ApplicationController
-	respond_to :html, :json
+	respond_to :json
   
   def create
   	@user = User.find_by_auth_token(params[:auth_token])
