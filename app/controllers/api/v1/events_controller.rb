@@ -1,10 +1,5 @@
 class Api::V1::EventsController < ApplicationController
-
-	def new
-    #finds group and builds event for creating new events
-    @group = Group.find(params[:group_id])
-    @event = @group.events.build
-  end
+	respond_to :html, :json
   
   def update
     #finds an event and updates it attributes.  Relevant code located in event/show page nested inside a modal.
