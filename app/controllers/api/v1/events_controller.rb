@@ -1,5 +1,17 @@
 class Api::V1::EventsController < ApplicationController
 	respond_to :json
+
+  def index
+    @user = User.find_by_auth_token(params[:auth_token])
+    if @user
+      @group = Group.find(params[:group_id])
+      @events = @group.events
+
+      render :json => { :events => @events }
+    else
+      #permission denied
+    end
+  end
   
   def create
   	@user = User.find_by_auth_token(params[:auth_token])
