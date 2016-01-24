@@ -15,6 +15,7 @@ class Api::V1::EventsController < ApplicationController
   
   def create
   	@user = User.find_by_auth_token(params[:auth_token])
+    puts @user
 
   	if @user
       @group = Group.find(params[:group_id])
@@ -23,6 +24,7 @@ class Api::V1::EventsController < ApplicationController
       @event.start_at = params[:start_at]
       @event.end_at = params[:end_at]
       @event.content = params[:content]
+      puts "in event"
 
       if @event.save
         render :json => { :success => true }
