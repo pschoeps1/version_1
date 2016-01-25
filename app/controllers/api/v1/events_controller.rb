@@ -28,9 +28,9 @@ class Api::V1::EventsController < ApplicationController
 
       if @event.save
         render :json => { :success => true }
-	  else
-		render :json => { :success => false }, :status=>401
-	  end
+	    else
+		    render :json => { :success => false }, :status=>401
+	    end
 	else
 		#permission denied
 	end
