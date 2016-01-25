@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
     #validates :end_at, presence: true
     #validate  :file_size
 
-    attr_accessible :id, :name, :group_id, :content, :start_at, :end_at
+    #attr_accessible :id, :name, :group_id, :content, :start_at, :end_at
     
 
      def file_size
