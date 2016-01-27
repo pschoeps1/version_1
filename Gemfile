@@ -32,6 +32,7 @@ gem 'versionist'
 gem 'active_model_serializers'
 
 gem 'devise'
+gem "apns"  
 
 
 group :doc do

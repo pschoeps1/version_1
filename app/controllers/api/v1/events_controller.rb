@@ -15,7 +15,6 @@ class Api::V1::EventsController < ApplicationController
   
   def create
   	@user = User.find_by_auth_token(params[:auth_token])
-    puts @user
 
   	if @user
       @group = Group.find(params[:group_id])
@@ -24,16 +23,42 @@ class Api::V1::EventsController < ApplicationController
       @event.start_at = params[:start_at]
       @event.end_at = params[:end_at]
       @event.content = params[:content]
-      puts "in event"
 
       if @event.save
         render :json => { :success => true }
+        push_event(@event, @group, @user)
 	    else
 		    render :json => { :success => false }, :status=>401
 	    end
 	else
 		#permission denied
 	end
+  end
+
+  def edit
+    event = Event.find(params[:id])
+    event.name = params[:group_name]
+    event.name = params[:name]
+    event.start_at = params[:start_at]
+    event.end_at = params[:end_at]
+    event.content = params[:content]
+    event.save
+
+      if event.save
+        render :json => { :success => true }
+      else
+        render :json => { :success => false }, :status=>401
+      end
+  end
+
+  def push_event(event, group, user)
+    users = @group.followers
+    users.each do |follower|
+      Notification.create(  
+            alert:     "#{user.username} created the event #{event.name} in #{group.name} at #{@time}",
+            recipient: follower
+          ) 
+    end
   end
 
   
