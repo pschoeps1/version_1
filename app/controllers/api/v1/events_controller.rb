@@ -51,6 +51,20 @@ class Api::V1::EventsController < ApplicationController
       end
   end
 
+  def destroy
+    user = User.find_by_auth_token(params[:auth_token])
+    event = Event.find(params[:id])
+    if user
+      event.destroy
+    end
+
+    if event.destroy
+      render :json => { :success => true }
+    else
+      render :json => { :success => false }, :status=>401
+    end
+  end
+
   def push_event(event, group, user)
     users = @group.followers
     users.each do |follower|
