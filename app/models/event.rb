@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
     #validate  :file_size
 
     #attr_accessible :id, :name, :group_id, :content, :start_at, :end_at
+
+    default_scope -> { order(created_at: :desc) }
     
 
      def file_size
