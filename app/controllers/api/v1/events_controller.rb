@@ -26,7 +26,7 @@ class Api::V1::EventsController < ApplicationController
 
       if @event.save
         render :json => { :success => true }
-        push_event(@event, @group, @user)
+        #push_event(@event, @group, @user)
 	    else
 		    render :json => { :success => false }, :status=>401
 	    end
@@ -65,14 +65,14 @@ class Api::V1::EventsController < ApplicationController
     end
   end
 
-  def push_event(event, group, user)
-    users = @group.followers
-    users.each do |follower|
-      Notification.create(  
-            alert:     "#{user.username} created the event #{event.name} in #{group.name} at #{@time}",
-            recipient: follower
-          ) 
-    end
+  #def push_event(event, group, user)
+  #  users = @group.followers
+  #  users.each do |follower|
+   #   Notification.create(  
+    #        alert:     "#{user.username} created the event #{event.name} in #{group.name} at #{@time}",
+     #       recipient: follower
+      #    ) 
+    #end
   end
 
   
