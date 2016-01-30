@@ -73,7 +73,7 @@ class Api::V1::EventsController < ApplicationController
      #       recipient: follower
       #    ) 
     #end
-  end
+  #end
 
   
 end
