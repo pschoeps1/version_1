@@ -79,12 +79,13 @@ class Api::V1::UsersController < ApplicationController
 
   def all_events
     user = User.find_by_auth_token(params[:auth_token])
-    groups = user.groups 
+    owned_groups = user.groups
+    followed_groups = user.following
+    total_groups = followed_groups + owned_groups
     events = []
-    groups.each do |group|
-      group_events = group.events 
-        events << group.events 
-        events.each do |event|
+    total_groups.each do |group|
+      group_events = Event.where(:group_id => group.id)
+        group_events.each do |event|
           events << event 
         end
     end
