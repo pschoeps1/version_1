@@ -96,10 +96,6 @@ class Api::V1::UsersController < ApplicationController
       end
     end
 
-    events.each do |event|
-      puts event.name 
-    end 
-
     render json: { events: events }
   end
 
