@@ -9,6 +9,7 @@ Version1::Application.routes.draw do
           get 'dashboard'
           get 'notifications'
           get 'inbox'
+          get 'all_events'
         end
       end
       #needed to specify sign out path because it was incorrectly routing upon deployment

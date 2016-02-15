@@ -77,6 +77,23 @@ class Api::V1::UsersController < ApplicationController
     render json: { users: user_tokens, group_name: group_name, group_id: group_id }
   end
 
+  def all_events
+    user = User.find_by_auth_token(params[:auth_token])
+    groups = user.groups 
+    events = []
+    groups.each do |group|
+      group_events = group.events 
+      if group.events.length > 5
+        events << group.events.last(5)
+      else
+        events << group.events 
+      end
+    end
+
+    render json: { events: events }
+  end
+
+
   private
 
     def user_params
