@@ -85,9 +85,16 @@ class Api::V1::UsersController < ApplicationController
     events = []
     total_groups.each do |group|
       group_events = Event.where(:group_id => group.id)
+      if group_events.length > 5
+        last_five = group_events.last(5)
+        last_five.each do |event|
+          events << event 
+        end
+      else
         group_events.each do |event|
           events << event 
         end
+      end
     end
 
     render json: { events: events }
