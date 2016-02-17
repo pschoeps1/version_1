@@ -66,12 +66,14 @@ class Api::V1::UsersController < ApplicationController
     relationships.each do |u|
       user = User.find(u.follower_id)
       devices = user.devices
-      devices.each do |d|
-        user_tokens << d.token
+      apple_devices = devices.where(:device_type => "APPLE")
+      apple_devices.each do |d|
+        user_tokens << d.token 
       end
     end
     owner_devices = owner.devices
-    owner_devices.each do |o|
+    apple_owner_devices = owner_devices.where(:device_type => "APPLE")
+    apple_owner_devices.each do |o|
       user_tokens << o.token
     end
     render json: { users: user_tokens, group_name: group_name, group_id: group_id }

@@ -19,7 +19,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       if registered_device
         #do nothing
       else
-        new_device = Device.create(:user_id => resource.id, :token => device_id)
+        new_device = Device.create(:user_id => resource.id, :token => device_id, :device_type => params[:device_type])
         new_device.save
       end
     end
