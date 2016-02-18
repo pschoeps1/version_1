@@ -14,12 +14,13 @@ class Api::V1::SessionsController < Devise::SessionsController
     return invalid_login_attempt_2 unless resource
 
     device_id = user_params[:device_id] if user_params[:device_id]
+    device_type = user_params[:device_type] if user_params[:device_type]
     if device_id
       registered_device = Device.find_by_token(device_id)
       if registered_device
         #do nothing
       else
-        new_device = Device.create(:user_id => resource.id, :token => device_id, :device_type => params[:device_type])
+        new_device = Device.create(:user_id => resource.id, :token => device_id, :device_type => device_type)
         new_device.save
       end
     end
@@ -59,6 +60,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def user_params
-      params.fetch(:user, {}).permit(:email, :password, :auth_token, :device_id :device_type)
+      params.fetch(:user, {}).permit(:email, :password, :auth_token, :device_id, :device_type)
   end
 end
