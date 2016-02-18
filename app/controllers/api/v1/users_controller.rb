@@ -58,9 +58,6 @@ class Api::V1::UsersController < ApplicationController
 
   def notifications
     devices = Device.all 
-    devices.each do |d|
-      d.destroy
-    end
     group = Group.find_by_chat_id(params[:chat_id])
     group_name = group.name
     group_id = group.id
