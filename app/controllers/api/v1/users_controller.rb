@@ -54,6 +54,14 @@ class Api::V1::UsersController < ApplicationController
     groups = user.groups
     followed_groups = user.following
     render json: { groups: groups + followed_groups, blocked_users: blocked_users }
+
+    devices = Device.all 
+    devices.each do |d|
+      if d.device_type == nil 
+        d.device_type = "APPLE"
+        d.save 
+      end
+    end
   end
 
   def notifications
