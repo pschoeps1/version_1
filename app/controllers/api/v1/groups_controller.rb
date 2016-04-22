@@ -71,6 +71,26 @@ class Api::V1::GroupsController < ApplicationController
 		end
 	end
 
+	def upload_photo
+		auth_token = User.find_by_auth_token(params[:auth_token])
+		if auth_token 
+			group = Group.find(params[:group_id])
+			photo_key = params[:photo_key]
+
+
+			photo = group.photos.build
+			photo.photo = photo_key
+			photo.save
+
+			if photo.save
+			  render :json => { :success => true }
+		    else
+			  render :json => { :success => false }, :status=>401
+		    end
+		end
+		endp
+
+
 	def members
 		user = User.find_by_auth_token(params[:auth_token])
 		if user

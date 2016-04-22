@@ -36,6 +36,8 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def edit
+    @user = User.find_by_auth_token(params[:auth_token])
+    #lets make this official as soon as the next update of iOS
     event = Event.find(params[:id])
     event.name = params[:group_name]
     event.name = params[:name]
