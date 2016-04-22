@@ -88,7 +88,7 @@ class Api::V1::GroupsController < ApplicationController
 			  render :json => { :success => false }, :status=>401
 		    end
 		end
-		endp
+	end
 
 
 	def members
