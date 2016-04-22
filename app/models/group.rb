@@ -8,6 +8,8 @@ class Group < ActiveRecord::Base
    has_many :followers, through: :relationships, source: :follower, dependent: :destroy
    accepts_nested_attributes_for :user
 
+   has_many :photos, dependent: :destroy
+
    
    default_scope -> { order(created_at: :desc) }
    validates :user_id, presence: true
