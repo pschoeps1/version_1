@@ -22,26 +22,15 @@ class Api::V1::EventsController < ApplicationController
       @event.name = params[:name]
       @event.start_at = params[:start_at]
 
-      puts "raw param start at"
-      puts params[:start_at]
-
       end_at_formatted = DateTime.parse(params[:end_at]).strftime('%Q')
       start_at_formatted = DateTime.parse(params[:start_at]).strftime('%Q')
-      puts "formatted as mili"
-      puts end_at_formatted
-      puts start_at_formatted
 
-
-
+      #sets the end date to that same as the start date if the end date is before the start date (meaning the user did not enter a start date)
       if end_at_formatted <= start_at_formatted
         @event.end_at = params[:start_at]
       else
         @event.end_at = params[:end_at]
       end
-
-
-
-
 
       @event.content = params[:content]
 
@@ -63,7 +52,19 @@ class Api::V1::EventsController < ApplicationController
     event.name = params[:group_name]
     event.name = params[:name]
     event.start_at = params[:start_at]
-    event.end_at = params[:end_at]
+
+
+    end_at_formatted = DateTime.parse(params[:end_at]).strftime('%Q')
+    start_at_formatted = DateTime.parse(params[:start_at]).strftime('%Q')
+
+    #sets the end date to that same as the start date if the end date is before the start date (meaning the user did not enter a start date)
+    if end_at_formatted <= start_at_formatted
+      event.end_at = params[:start_at]
+    else
+      event.end_at = params[:end_at]
+    end
+
+
     event.content = params[:content]
     event.save
 
