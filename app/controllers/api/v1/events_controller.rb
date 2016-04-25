@@ -31,8 +31,7 @@ class Api::V1::EventsController < ApplicationController
       puts end_at_formatted
       puts start_at_formatted
 
-      puts "after more formatting"
-      puts start_at_formatted.strftime
+
 
       if end_at_formatted <= start_at_formatted
         @event.end_at = params[:start_at]
