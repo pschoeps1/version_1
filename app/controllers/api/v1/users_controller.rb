@@ -59,6 +59,7 @@ class Api::V1::UsersController < ApplicationController
 
   def notifications
     devices = Device.all 
+    message_owner = User.find[params[:id]]
     group = Group.find_by_chat_id(params[:chat_id])
     group_name = group.name
     group_id = group.id
@@ -67,11 +68,13 @@ class Api::V1::UsersController < ApplicationController
     user_tokens = []
     relationships.each do |u|
       user = User.find(u.follower_id)
-      devices = user.devices
-      apple_devices = devices.where(:device_type => "APPLE")
-      apple_devices.each do |d|
-        puts d.device_type
-        user_tokens << d.token 
+      unless message_owner.id.to_i == user.id.to_i
+        devices = user.devices
+        apple_devices = devices.where(:device_type => "APPLE")
+        apple_devices.each do |d|
+          puts d.device_type
+          user_tokens << d.token 
+        end
       end
     end
     owner_devices = owner.devices
