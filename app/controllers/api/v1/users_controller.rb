@@ -59,7 +59,7 @@ class Api::V1::UsersController < ApplicationController
 
   def notifications
     devices = Device.all 
-    message_owner = User.find[params[:id]]
+    message_owner = User.find(params[:id])
     group = Group.find_by_chat_id(params[:chat_id])
     group_name = group.name
     group_id = group.id
