@@ -77,11 +77,13 @@ class Api::V1::UsersController < ApplicationController
         end
       end
     end
-    owner_devices = owner.devices
-    apple_owner_devices = owner_devices.where(:device_type => "APPLE")
-    apple_owner_devices.each do |o|
-      puts o.device_type
-      user_tokens << o.token
+    unless message_owner.id.to_i == owner.id.to_i
+      owner_devices = owner.devices
+      apple_owner_devices = owner_devices.where(:device_type => "APPLE")
+      apple_owner_devices.each do |o|
+        puts o.device_type
+        user_tokens << o.token
+      end
     end
     render json: { users: user_tokens, group_name: group_name, group_id: group_id }
   end
