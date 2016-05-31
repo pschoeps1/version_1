@@ -72,7 +72,6 @@ class Api::V1::UsersController < ApplicationController
         devices = user.devices
         apple_devices = devices.where(:device_type => "APPLE")
         apple_devices.each do |d|
-          puts d.device_type
           user_tokens << d.token 
         end
       end
@@ -81,11 +80,11 @@ class Api::V1::UsersController < ApplicationController
       owner_devices = owner.devices
       apple_owner_devices = owner_devices.where(:device_type => "APPLE")
       apple_owner_devices.each do |o|
-        puts o.device_type
         user_tokens << o.token
       end
     end
-    render json: { users: user_tokens, group_name: group_name, group_id: group_id }
+    user_tokens_uniq = user_tokens.uniq
+    render json: { users: user_tokens_uniq, group_name: group_name, group_id: group_id }
   end
 
   def all_events
