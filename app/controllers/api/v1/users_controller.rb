@@ -65,6 +65,13 @@ class Api::V1::UsersController < ApplicationController
     group_id = group.id
     owner = User.find(group.user_id)
     relationships = Relationship.where(:followed_id => group.id)
+
+    group_users = []
+      relationships.each do |r|
+        user = User.find(r.follower_id)
+        group_users << user
+    end
+
     user_tokens = []
     relationships.each do |u|
       user = User.find(u.follower_id)
@@ -83,8 +90,9 @@ class Api::V1::UsersController < ApplicationController
         user_tokens << o.token
       end
     end
+    #delete duplicate phone tokens to avoid sending duplicate notifications
     user_tokens_uniq = user_tokens.uniq
-    render json: { users: user_tokens_uniq, group_name: group_name, group_id: group_id }
+    render json: { users: user_tokens_uniq, group_name: group_name, group_id: group_id, group_users: group_users }
   end
 
   def all_events
