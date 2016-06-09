@@ -79,7 +79,7 @@ class Api::V1::UsersController < ApplicationController
         devices = user.devices
         apple_devices = devices.where(:device_type => "APPLE")
         apple_devices.each do |d|
-          user_tokens << d.token 
+          user_tokens << [d.token, user.id]
         end
       end
     end
@@ -87,7 +87,7 @@ class Api::V1::UsersController < ApplicationController
       owner_devices = owner.devices
       apple_owner_devices = owner_devices.where(:device_type => "APPLE")
       apple_owner_devices.each do |o|
-        user_tokens << o.token
+        user_tokens << [o.token, owner.id]
       end
     end
     #delete duplicate phone tokens to avoid sending duplicate notifications
