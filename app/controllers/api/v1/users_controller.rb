@@ -67,6 +67,7 @@ class Api::V1::UsersController < ApplicationController
     relationships = Relationship.where(:followed_id => group.id)
 
     group_users = []
+    group_users << owner.id
       relationships.each do |r|
         user = User.find(r.follower_id)
         group_users << user.id
